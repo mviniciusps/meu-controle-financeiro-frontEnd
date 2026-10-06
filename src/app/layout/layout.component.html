@@ -1,9 +1,15 @@
-<div class="layout">
-  <aside class="layout-sidebar">
-    <app-sidebar></app-sidebar>
-  </aside>
+<aside class="sidebar">
+  <h1>Meu Controle Financeiro</h1>
 
-  <main class="layout-content">
-    <router-outlet></router-outlet>
-  </main>
-</div>
+  <nav>
+    <a routerLink="/dashboard">Dashboard</a>
+    <a routerLink="/lancamentos">Lançamentos</a>
+    <a routerLink="/cartoes">Cartões</a>
+    <a routerLink="/relatorios">Relatórios</a>
+    <a routerLink="/objetivos">Objetivos</a>
+  </nav>
+</aside>
+
+<main class="content">
+  <router-outlet></router-outlet>
+</main>
