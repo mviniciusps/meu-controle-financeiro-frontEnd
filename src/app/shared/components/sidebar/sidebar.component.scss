@@ -1,0 +1,13 @@
+.sidebar {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-header {
+    flex-shrink: 0;
+}
+
+.sidebar-menu {
+    flex: 1;
+}
