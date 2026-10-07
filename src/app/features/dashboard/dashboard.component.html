@@ -60,7 +60,7 @@
 
                     <div class="composition-item">
                         <span>{{item.nome}}</span>
-                        <strong>{{item.valor}}</strong>
+                        <strong>{{item.valor | currency:'BRL'}}</strong>
                     </div>
                     }
 
@@ -96,8 +96,8 @@
                     </div>
 
                     <div class="goal-values">
-                        <span>R$ 8.500,00</span>
-                        <span>R$ 20.000,00</span>
+                        <span>{{ objetivoPrincipal.valorAtual | currency:'BRL' }}</span>
+                        <span>{{ objetivoPrincipal.valorMeta | currency:'BRL' }}</span>
                     </div>
 
                 </div>

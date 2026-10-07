@@ -1,28 +1,28 @@
 <aside class="sidebar">
 
   <div class="sidebar-header">
-    <!-- Logo / nome do sistema -->
+    <h1>Meu Controle Financeiro</h1>
   </div>
 
   <nav class="sidebar-menu">
 
-    <a routerLink="/dashboard">
+    <a routerLink="/dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
       Dashboard
     </a>
 
-    <a routerLink="/lancamentos">
+    <a routerLink="/lancamentos" routerLinkActive="active">
       Lançamentos
     </a>
 
-    <a routerLink="/cartoes">
+    <a routerLink="/cartoes" routerLinkActive="active">
       Cartões
     </a>
 
-    <a routerLink="/relatorios">
+    <a routerLink="/relatorios" routerLinkActive="active">
       Relatórios
     </a>
 
-    <a routerLink="/objetivos">
+    <a routerLink="/objetivos" routerLinkActive="active">
       Objetivos
     </a>
 
