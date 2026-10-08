@@ -1,154 +1,167 @@
 <section class="dashboard">
 
+    <!-- CABEÇALHO -->
     <header class="page-header">
         <div>
-            <h2>Visão financeira</h2>
-            <p>Acompanhe sua situação financeira de forma geral.</p>
+            <h2>Visão Financeira</h2>
+            <p>Visao geral e patrimonial</p>
         </div>
 
         <button>+ Importar extrato</button>
     </header>
 
+
+    <!-- RESUMO FINANCEIRO -->
     <section class="summary-cards">
 
         <article class="summary-card">
-            <span>Patrimônio líquido</span>
-            <strong>{{patrimonioLiquido | currency:'BRL'}}</strong>
+            <span>Patrimonio Liquido</span>
+            <strong>{{ patrimonioLiquido | currency:'BRL'}}</strong>
+            <small>Ativos - positivos</small>
         </article>
 
         <article class="summary-card">
             <span>Dinheiro disponível</span>
-            <strong>{{dinheiroDisponivel | currency:'BRL'}}</strong>
+            <strong>{{ dinheiroDisponivel | currency:'BRL'}}</strong>
+            <small>Uso imediato</small>
         </article>
 
         <article class="summary-card">
             <span>Patrimônio / ativos</span>
-            <strong>{{patrimonioTotal | currency:'BRL'}}</strong>
+            <strong>{{ patrimonioTotal | currency:'BRL'}}</strong>
+            <small>inclui FGTS e direitos</small>
         </article>
 
         <article class="summary-card">
             <span>Dívidas / passivos</span>
-            <strong>{{dividas | currency:'BRL'}}</strong>
+            <strong>{{ dividas | currency:'BRL'}}</strong>
+            <small>Cartões + parcelamentos</small>
         </article>
-
-        <section class="dashboard-grid">
-
-            <article class="panel evolution-panel">
-                <div class="panel-header">
-                    <div>
-                        <h3>Evolução do patrimônio líquido</h3>
-                        <p>Acompanhe a evolução ao longo dos meses.</p>
-                    </div>
-                </div>
-
-                <div class="chart-placeholder">
-                    <span>Gráfico de evolução</span>
-                </div>
-            </article>
-
-            <article class="panel composition-panel">
-                <div class="panel-header">
-                    <div>
-                        <h3>Composição financeira</h3>
-                        <p>Onde está seu patrimônio.</p>
-                    </div>
-                </div>
-
-                <div class="composition-list">
-
-                    @for (item of composicaoFinanceira; track item.nome) {
-
-                    <div class="composition-item">
-                        <span>{{item.nome}}</span>
-                        <strong>{{item.valor | currency:'BRL'}}</strong>
-                    </div>
-                    }
-
-                </div>
-
-            </article>
-
-        </section>
-
-        <section class="bottom-grid">
-
-            <article class="panel">
-                <div class="panel-header">
-                    <div>
-                        <h3>Objetivos</h3>
-                        <p>Acompanhe o que você está construindo.</p>
-                    </div>
-
-                    <a routerLink="/objetivos">Ver objetivos</a>
-                </div>
-
-                <div class="goal">
-
-                    <div class="goal-header">
-                        <span>{{ objetivoPrincipal.nome }}</span>
-                        <strong>{{ percentualObjetivo | number:'1.1-1' }}%</strong>
-                    </div>
-
-                    <div class="progress-bar">
-                        <!-- Propertybind [] = A largura desse elemento deve receber o valor da propriedade percentualObjetivo. -->
-                        <div class="progress" [style.width.%]="percentualObjetivo">
-                        </div>
-                    </div>
-
-                    <div class="goal-values">
-                        <span>{{ objetivoPrincipal.valorAtual | currency:'BRL' }}</span>
-                        <span>{{ objetivoPrincipal.valorMeta | currency:'BRL' }}</span>
-                    </div>
-
-                </div>
-            </article>
-
-
-            <article class="panel">
-                <div class="panel-header">
-                    <div>
-                        <h3>Projeção financeira</h3>
-                        <p>Estimativa baseada no seu histórico.</p>
-                    </div>
-
-                    <a routerLink="/relatorios">Ver projeção</a>
-                </div>
-
-                <div class="projection">
-
-                    <div>
-                        <span>Patrimônio projetado</span>
-                        <strong>R$ 31.200,00</strong>
-                    </div>
-
-                    <div>
-                        <span>Prazo</span>
-                        <strong>12 meses</strong>
-                    </div>
-
-                </div>
-            </article>
-
-
-            <article class="panel ai-panel">
-                <div class="panel-header">
-                    <div>
-                        <h3>Análise por IA</h3>
-                        <p>Uma visão geral da sua situação financeira.</p>
-                    </div>
-
-                    <button>Gerar análise</button>
-                </div>
-
-                <p class="ai-message">
-                    Seus gastos estão acima da média dos últimos meses.
-                    A análise detalhada será gerada a partir dos seus lançamentos,
-                    cartões, patrimônio e objetivos.
-                </p>
-            </article>
-
-        </section>
 
     </section>
 
+    <!-- EVOLUÇAO E COMPOSIÇAO -->
+    <section class="dashboard-grid">
+
+        <!-- EVOLUÇAO -->
+        <article class="panel evolution-panel">
+
+            <div class="panel-header">
+                <div>
+                    <h3>Evoluão de patrimonio líquido</h3>
+                    <p>Acompanhe a evolução ao longo dos meses.</p>
+                </div>
+            </div>
+
+            <div class="chart-placeholder">
+                <span>Gráfico de evoluçao</span>
+            </div>
+
+        </article>
+
+        <!-- COMPOSIÇÃO -->
+        <article class="panel evolution-panel">
+
+            <div class="panel-header">
+                <div>
+                    <h3>Composiçao financeira</h3>
+                    <p>Onde está seu patrimônio.</p>
+                </div>
+            </div>
+
+            <div class="composition-list">
+                @for (item of composicaoFinanceira; track item.nome) {
+
+                <div class="composition-item">
+                    <span>{{item.nome}}</span>
+                    <strong>{{item.valor | currency:'BRL'}}</strong>
+                </div>
+
+                }
+            </div>
+
+        </article>
+
+    </section>
+
+    <!-- OBEJTIVOS E PROJEÇAO -->
+    <section class="bottom-grid">
+
+        <article class="panel">
+
+            <div class="panel-header">
+                <div>
+                    <h3>Objetivos</h3>
+                    <p>Acompanhe o que você está construindo</p>
+                </div>
+
+                <a routerLink="/objetivos">Ver objetivos</a>
+            </div>
+
+            <div class="goal">
+
+                <div class="goal-header">
+                    <span>{{objetivoPrincipal.nome}}</span>
+                    <strong>{{percentualObjetivo | number:'1.1-1'}}%</strong>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress" [style.width.%]="percentualObjetivo">
+                    </div>
+                </div>
+
+                <div class="goal-values">
+                    <span>{{objetivoPrincipal.valorAtual | currency:'BRL'}}</span>
+                    <span>{{objetivoPrincipal.valorMeta| currency:'BRL'}}</span>
+                </div>
+
+            </div>
+
+        </article>
+
+        <!-- PROJEÇAO -->
+        <article class="panel">
+
+            <div class="panel-header">
+                <div>
+                    <h3>Projeçao financeira</h3>
+                    <p>Estimativa baseada no seu histórico.</p>
+                </div>
+
+                <a routerLink="/relatorios">Ver projeçao</a>
+            </div>
+
+            <div class="projection">
+                <div>
+                    <span>patrimonio projetado</span>
+                    <strong>R$ 31.200,00 </strong>
+                </div>
+                <div>
+                    <span>Prazo</span>
+                    <strong>12 meses</strong>
+                </div>
+            </div>
+
+        </article>
+
+        <!-- IA -->
+        <article class="panel ai-panel">
+
+            <div class="panel-header">
+                <div>
+                    <h3>Análise por IA</h3>
+                    <p>Uma visão geral da sua situção financeira./p>
+                </div>
+
+                <button>Gerar análise</button>
+            </div>
+
+            <p class="ai-message">
+                Seus gastos estão acima da média dos últimos meses. A análise detalhada será gerada a partir dos seus
+                lançamentos, cartões, patrimônio e objetivos.
+            </p>
+
+        </article>
+
+    </section>
 </section>

@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { CurrencyPipe, DecimalPipe } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [CurrencyPipe, DecimalPipe],
+  imports: [CurrencyPipe, DecimalPipe, RouterLink],
+  // RouterLink pois é STANDALONE
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })
@@ -24,15 +26,15 @@ export class DashboardComponent {
     },
     {
       nome: 'Investimentos',
-      valor: 8500.00
+      valor: 7500.00
     },
     {
       nome: 'FGTS',
-      valor: 7200.00
+      valor: 9100.00
     },
     {
       nome: 'Outros direitos',
-      valor: 5358.00
+      valor: 4458.00
     }
 
   ];
