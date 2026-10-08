@@ -30,6 +30,13 @@
     gap: 16px;
 }
 
+.summary-card {
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    background: #fff;
+}
+
 .summary-card span {
     display: block;
     margin-bottom: 12px;
@@ -63,11 +70,51 @@
 .chart-placeholder {
     height: 280px;
     margin-top: 24px;
+    padding: 16px 8px 0;
     display: flex;
+    align-items: stretch;
+    justify-content: space-around;
+    gap: 12px;
+    border-bottom: 1px solid #ddd;
+}
+
+.chart-column {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
     align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+.chart-value {
+    font-size: 11px;
+    color: #555;
+    white-space: nowrap;
+}
+
+.chart-bar-area {
+    width: 100%;
+    flex: 1;
+    display: flex;
+    align-items: flex-end;
     justify-content: center;
-    border: 1px dashed #ccc;
-    border-radius: 8px;
+    min-height: 0;
+}
+
+.chart-bar {
+    width: 65%;
+    max-width: 48px;
+    min-height: 4px;
+    background: #52796f;
+    border-radius: 6px 6px 0 0;
+    transition: height 0.3s ease;
+}
+
+.chart-month {
+    font-size: 12px;
+    color: #555;
 }
 
 .composition-list {
@@ -131,9 +178,9 @@
 }
 
 .progress {
-    width: 42.5%;
     height: 100%;
     background: #333;
+    transition: width 0.3s ease;
 }
 
 .goal-values {

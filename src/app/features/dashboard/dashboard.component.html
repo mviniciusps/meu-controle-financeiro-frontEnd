@@ -17,7 +17,7 @@
         <article class="summary-card">
             <span>Patrimonio Liquido</span>
             <strong>{{ patrimonioLiquido | currency:'BRL'}}</strong>
-            <small>Ativos - positivos</small>
+            <small>Ativos - passivos</small>
         </article>
 
         <article class="summary-card">
@@ -54,13 +54,27 @@
             </div>
 
             <div class="chart-placeholder">
-                <span>Gráfico de evoluçao</span>
+                @for (item of evolucaoPatrimonial; track item.mes) {
+                <div class="chart-column">
+
+                    <span class="chart-value">
+                        {{item.valor | currency:'BRL':'symbol':'1.0-0'}}
+                    </span>
+
+                    <div class="chart-bar-area">
+                        <div class="chart-bar" [style.height.%]="(item.valor / maiorValorPatrimonio) * 100"
+                            [title]="item.valor | currency:'BRL'">
+                        </div>
+                    </div>
+
+                </div>
+                }
             </div>
 
         </article>
 
         <!-- COMPOSIÇÃO -->
-        <article class="panel evolution-panel">
+        <article class="panel composition-panel">
 
             <div class="panel-header">
                 <div>
@@ -150,7 +164,7 @@
             <div class="panel-header">
                 <div>
                     <h3>Análise por IA</h3>
-                    <p>Uma visão geral da sua situção financeira./p>
+                    <p>Uma visão geral da sua situção financeira.</p>
                 </div>
 
                 <button>Gerar análise</button>

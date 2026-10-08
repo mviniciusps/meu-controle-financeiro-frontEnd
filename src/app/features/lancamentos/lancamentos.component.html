@@ -1,1 +1,124 @@
-<p>lancamentos works!</p>
+<section class="lancamentos">
+    <header class="page-header">
+        <div>
+            <h2>Lançamentos</h2>
+            <p>Controle suas receitas e despesas.</p>
+        </div>
+    </header>
+
+    <section class="summary-cards">
+        <article class="summary-card">
+            <span>Total de receitas</span>
+            <strong>{{ totalReceitas | currency:'BRL' }}</strong>
+        </article>
+
+        ```
+        <article class="summary-card">
+            <span>Total de despesas</span>
+            <strong>{{ totalDespesas | currency:'BRL' }}</strong>
+        </article>
+
+        <article class="summary-card">
+            <span>Saldo dos lançamentos</span>
+            <strong>{{ saldo | currency:'BRL' }}</strong>
+        </article>
+        ```
+
+    </section>
+
+    <section class="panel form-panel">
+        <h3>Novo lançamento</h3>
+
+        ```
+        <form (ngSubmit)="adicionarLancamento()">
+            <div class="form-grid">
+                <label>
+                    Descrição
+                    <input type="text" name="descricao" [(ngModel)]="descricao" placeholder="Ex.: Conta de luz"
+                        required>
+                </label>
+
+                <label>
+                    Valor (R$)
+                    <input type="number" name="valor" [(ngModel)]="valor" min="0.01" step="0.01" placeholder="0,00"
+                        required>
+                </label>
+
+                <label>
+                    Tipo
+                    <select name="tipo" [(ngModel)]="tipo">
+                        <option value="Despesa">Despesa</option>
+                        <option value="Receita">Receita</option>
+                    </select>
+                </label>
+
+                <label>
+                    Categoria
+                    <select name="categoria" [(ngModel)]="categoria">
+                        @for (item of categorias; track item) {
+                        <option [value]="item">{{ item }}</option>
+                        }
+                    </select>
+                </label>
+
+                <label>
+                    Data
+                    <input type="date" name="data" [(ngModel)]="data" required>
+                </label>
+            </div>
+
+            <button type="submit">Adicionar lançamento</button>
+        </form>
+        ```
+
+    </section>
+
+    <section class="panel transactions-panel">
+        <div class="panel-header">
+            <h3>Movimentações</h3>
+            <span>{{ lancamentos.length }} registros</span>
+        </div>
+
+        ```
+        @if (lancamentos.length > 0) {
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Data</th>
+                        <th>Descrição</th>
+                        <th>Categoria</th>
+                        <th>Tipo</th>
+                        <th>Valor</th>
+                        <th>Ação</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @for (item of lancamentos; track item.id) {
+                    <tr>
+                        <td>{{ item.data | date:'dd/MM/yyyy' }}</td>
+                        <td>{{ item.descricao }}</td>
+                        <td>{{ item.categoria }}</td>
+                        <td>{{ item.tipo }}</td>
+                        <td [class.receita]="item.tipo === 'Receita'" [class.despesa]="item.tipo === 'Despesa'">
+                            {{ item.tipo === 'Receita' ? '+' : '-' }}
+                            {{ item.valor | currency:'BRL' }}
+                        </td>
+                        <td>
+                            <button type="button" class="delete-button" (click)="excluirLancamento(item.id)">
+                                Excluir
+                            </button>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        } @else {
+        <p>Nenhum lançamento cadastrado.</p>
+        }
+        ```
+
+    </section>
+</section>
