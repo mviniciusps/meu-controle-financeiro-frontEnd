@@ -23,7 +23,7 @@ export class LancamentosComponent {
   valor: number | null = null;
   tipo: 'Receita' | 'Despesa' = 'Despesa';
   categoria = 'Alimentação';
-  data = new Date().toISOString().slice(0.10);
+  data = new Date().toISOString().slice(0, 10);
 
   categorias = [
     'Moradia',
@@ -33,6 +33,12 @@ export class LancamentosComponent {
     'Lazer',
     'Salário',
     'Outros'
+  ];
+
+  meses = [
+    'Janeiro', 'Fevereiro', 'Março', 'Abril',
+    'Maio', 'Junho', 'Julho', 'Agosto',
+    'Setembro', 'Outubro', 'Novembro', 'Dezembro'
   ];
 
   lancamentos: Lancamento[] = [
@@ -62,6 +68,9 @@ export class LancamentosComponent {
     }
   ];
 
+  mesSelecionado = this.obterMesAtual();
+
+  // Propriedades reativas
   get totalReceitas(): number {
     return this.lancamentos.filter(item => item.tipo === 'Receita').reduce((total, item) => total + item.valor, 0);
   }
@@ -72,6 +81,19 @@ export class LancamentosComponent {
 
   get saldo(): number {
     return this.totalReceitas - this.totalDespesas;
+  }
+
+  get lancamentosFiltrados(): Lancamento[] {
+    return this.lancamentos.filter(item => item.data.slice(0, 7) === this.mesSelecionado);
+  }
+
+  get mesPorExtenso(): string {
+    if (!this.mesSelecionado) return '';
+
+    const [ano, mes] = this.mesSelecionado.split('-');
+    const nomeMes = this.meses[Number(mes) - 1];
+
+    return `${nomeMes} de ${ano}`;
   }
 
   adicionarLancamento(): void {
@@ -106,4 +128,33 @@ export class LancamentosComponent {
       item => item.id !== id
     );
   }
+
+  mesAnterior(): void {
+    const data = new Date(`${this.mesSelecionado}-01T12:00:00`);
+    data.setMonth(data.getMonth() - 1);
+
+    this.mesSelecionado = [
+      data.getFullYear(),
+      String(data.getMonth() + 1).padStart(2, '0')
+    ].join('-');
+  }
+
+  proximoMes(): void {
+    const data = new Date(`${this.mesSelecionado}-01T12:00:00`);
+    data.setMonth(data.getMonth() + 1);
+
+    this.mesSelecionado = [
+      data.getFullYear(),
+      String(data.getMonth() + 1).padStart(2, '0')
+    ].join('-');
+  }
+
+  obterMesAtual(): string {
+    const hoje = new Date();
+    const ano = hoje.getFullYear();
+    const mes = String(hoje.getMonth() + 1).padStart(2, '0');
+
+    return `${ano}-${mes}`;
+  }
+
 }

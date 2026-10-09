@@ -153,3 +153,48 @@ th {
         grid-template-columns: 1fr;
     }
 }
+
+
+
+.month-filter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.month-navigation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+}
+
+.month-navigation strong {
+    min-width: 190px;
+    text-align: center;
+    text-transform: capitalize;
+}
+
+.month-navigation .month-arrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    background: #ffffff;
+    color: #374151;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.month-navigation .month-arrow:hover {
+    background: #f3f4f6;
+}
+
+.month-filter input[type="month"] {
+    max-width: 180px;
+}

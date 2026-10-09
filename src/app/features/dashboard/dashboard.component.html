@@ -55,6 +55,7 @@
 
             <div class="chart-placeholder">
                 @for (item of evolucaoPatrimonial; track item.mes) {
+
                 <div class="chart-column">
 
                     <span class="chart-value">
@@ -66,6 +67,8 @@
                             [title]="item.valor | currency:'BRL'">
                         </div>
                     </div>
+
+                    <span class="chart-month">{{item.mes}}</span>
 
                 </div>
                 }

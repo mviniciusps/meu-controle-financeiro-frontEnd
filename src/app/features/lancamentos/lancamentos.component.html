@@ -1,3 +1,4 @@
+<!-- TÍTULO -->
 <section class="lancamentos">
     <header class="page-header">
         <div>
@@ -6,13 +7,33 @@
         </div>
     </header>
 
+    <!-- PRIMEIRO CARD -->
+    <section class="panel month-filter">
+        <label for="mesSelecionado">Mês de referência</label>
+
+        <div class="month-navigation">
+
+            <button type="button" class="month-arrow" aria-label="Mês anterior" (click)="mesAnterior()">
+                &#10094;
+            </button>
+
+            <strong>{{ mesPorExtenso }}</strong>
+
+            <button type="button" class="month-arrow" aria-label="Próximo mês" (click)="proximoMes()">
+                &#10095;
+            </button>
+        </div>
+
+    </section>
+
+    <!-- SEGUNDA SEÇAO COM 3 CARDS ----------------------------------------------------------------------------------->
     <section class="summary-cards">
         <article class="summary-card">
             <span>Total de receitas</span>
             <strong>{{ totalReceitas | currency:'BRL' }}</strong>
         </article>
 
-        ```
+
         <article class="summary-card">
             <span>Total de despesas</span>
             <strong>{{ totalDespesas | currency:'BRL' }}</strong>
@@ -22,14 +43,16 @@
             <span>Saldo dos lançamentos</span>
             <strong>{{ saldo | currency:'BRL' }}</strong>
         </article>
-        ```
+
 
     </section>
 
+
+    <!-- PENULTIMA SEÇAO (LANÇAMENTO NOVO) ----------------------------------------------------------------------------------->
     <section class="panel form-panel">
         <h3>Novo lançamento</h3>
 
-        ```
+
         <form (ngSubmit)="adicionarLancamento()">
             <div class="form-grid">
                 <label>
@@ -55,9 +78,11 @@
                 <label>
                     Categoria
                     <select name="categoria" [(ngModel)]="categoria">
+
                         @for (item of categorias; track item) {
                         <option [value]="item">{{ item }}</option>
                         }
+
                     </select>
                 </label>
 
@@ -69,18 +94,19 @@
 
             <button type="submit">Adicionar lançamento</button>
         </form>
-        ```
+
 
     </section>
 
+    <!-- ÚLTIMO CARD (MOVIMENTAÇAO) ----------------------------------------------------------------------------------->
     <section class="panel transactions-panel">
         <div class="panel-header">
             <h3>Movimentações</h3>
-            <span>{{ lancamentos.length }} registros</span>
+            <span>{{ lancamentosFiltrados.length }} registros</span>
         </div>
 
-        ```
-        @if (lancamentos.length > 0) {
+
+        @if (lancamentosFiltrados.length > 0) {
         <div class="table-wrapper">
             <table>
                 <thead>
@@ -95,7 +121,7 @@
                 </thead>
 
                 <tbody>
-                    @for (item of lancamentos; track item.id) {
+                    @for (item of lancamentosFiltrados; track item.id) {
                     <tr>
                         <td>{{ item.data | date:'dd/MM/yyyy' }}</td>
                         <td>{{ item.descricao }}</td>
@@ -118,7 +144,7 @@
         } @else {
         <p>Nenhum lançamento cadastrado.</p>
         }
-        ```
+
 
     </section>
 </section>

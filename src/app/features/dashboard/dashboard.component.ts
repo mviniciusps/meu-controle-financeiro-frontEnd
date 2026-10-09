@@ -52,7 +52,7 @@ export class DashboardComponent {
   }
 
   get dividas(): number {
-    return this.ativos.reduce((total, passivo) => total + passivo.valor, 0);
+    return this.passivos.reduce((total, passivo) => total + passivo.valor, 0);
   }
 
   get patrimonioLiquido(): number {
