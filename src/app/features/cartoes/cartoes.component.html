@@ -1,1 +1,157 @@
-<p>cartoes works!</p>
+<section class="pagina-cartoes">
+  <header class="cabecalho">
+    <div>
+      <h1>Cartões</h1>
+      <p>Gerencie seus cartões, faturas e compras parceladas.</p>
+    </div>
+  </header>
+
+  <section class="resumo-cartoes">
+    <article class="resumo-card">
+      <span>Limite total</span>
+      <h2>{{ limiteTotal | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}</h2>
+      <small>Soma dos limites cadastrados</small>
+    </article>
+
+    <article class="resumo-card">
+      <span>Limite disponível</span>
+      <h2>{{ limiteDisponivel | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}</h2>
+      <small>Estimativa com base nas compras cadastradas</small>
+    </article>
+
+    <article class="resumo-card destaque">
+      <span>Fatura do período</span>
+      <h2>{{ totalFatura | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}</h2>
+      <small>{{ mesPorExtenso }}</small>
+    </article>
+  </section>
+
+  <section class="secao-cartoes">
+    <div class="titulo-secao">
+      <h2>Meus cartões</h2>
+
+      <select
+        aria-label="Filtrar cartões"
+        [(ngModel)]="cartaoSelecionado"
+      >
+        <option value="todos">Todos os cartões</option>
+        @for (cartao of cartoes; track cartao.id) {
+          <option [value]="cartao.id">{{ cartao.nome }}</option>
+        }
+      </select>
+    </div>
+
+    <div class="lista-cartoes">
+      @for (cartao of cartoesFiltrados; track cartao.id) {
+        <article class="cartao-visual">
+          <div class="cartao-topo">
+            <span>{{ cartao.nome }}</span>
+            <span class="bandeira">{{ cartao.bandeira }}</span>
+          </div>
+
+          <div class="chip-cartao"></div>
+
+          <p class="numero-cartao">•••• •••• •••• {{ cartao.final }}</p>
+
+          <div class="cartao-rodape">
+            <div>
+              <small>Limite</small>
+              <strong>
+                {{ cartao.limite | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}
+              </strong>
+            </div>
+
+            <div>
+              <small>Fechamento</small>
+              <strong>Dia {{ cartao.fechamento }}</strong>
+            </div>
+
+            <div>
+              <small>Vencimento</small>
+              <strong>Dia {{ cartao.vencimento }}</strong>
+            </div>
+          </div>
+        </article>
+      }
+    </div>
+  </section>
+
+  <section class="secao-fatura">
+    <div class="titulo-secao">
+      <div>
+        <h2>Faturas e compras</h2>
+        <p>Consulte os gastos de cada período.</p>
+      </div>
+
+      <div class="navegacao-mes">
+        <button
+          type="button"
+          aria-label="Mês anterior"
+          (click)="mesAnterior()"
+        >
+          ‹
+        </button>
+
+        <span>{{ mesPorExtenso }}</span>
+
+        <button
+          type="button"
+          aria-label="Próximo mês"
+          (click)="proximoMes()"
+        >
+          ›
+        </button>
+      </div>
+    </div>
+
+    <div class="tabela-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Descrição</th>
+            <th>Cartão</th>
+            <th>Categoria</th>
+            <th>Data</th>
+            <th>Parcela</th>
+            <th>Valor</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          @for (compra of comprasFiltradas; track compra.id) {
+            <tr>
+              <td class="descricao-compra">{{ compra.descricao }}</td>
+              <td>
+                <div class="identificacao-cartao">
+                  <span>{{ obterNomeCartao(compra.cartaoId) }}</span>
+                  <small>Final {{ obterFinalCartao(compra.cartaoId) }}</small>
+                </div>
+              </td>
+              <td>
+                <span class="categoria">{{ compra.categoria }}</span>
+              </td>
+              <td>{{ compra.data + 'T12:00:00' | date:'dd/MM/yyyy' }}</td>
+              <td>{{ compra.parcelaAtual }}/{{ compra.totalParcelas }}</td>
+              <td class="valor-compra">
+                {{ compra.valor | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}
+              </td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="6" class="estado-vazio">
+                Nenhuma compra encontrada neste período.
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+
+    <footer class="rodape-fatura">
+      <span>Total das compras exibidas</span>
+      <strong>
+        {{ totalFatura | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}
+      </strong>
+    </footer>
+  </section>
+</section>

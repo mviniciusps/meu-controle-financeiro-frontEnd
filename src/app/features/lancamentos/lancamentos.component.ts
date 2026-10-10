@@ -72,11 +72,15 @@ export class LancamentosComponent {
 
   // Propriedades reativas
   get totalReceitas(): number {
-    return this.lancamentos.filter(item => item.tipo === 'Receita').reduce((total, item) => total + item.valor, 0);
+    return this.lancamentosFiltrados
+      .filter(item => item.tipo === 'Receita')
+      .reduce((total, item) => total + item.valor, 0);
   }
 
   get totalDespesas(): number {
-    return this.lancamentos.filter(item => item.tipo === 'Despesa').reduce((total, item) => total + item.valor, 0)
+    return this.lancamentosFiltrados
+      .filter(item => item.tipo === 'Despesa')
+      .reduce((total, item) => total + item.valor, 0)
   }
 
   get saldo(): number {
