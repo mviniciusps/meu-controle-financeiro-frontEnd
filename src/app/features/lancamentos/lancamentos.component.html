@@ -1,11 +1,13 @@
 <!-- TÍTULO -->
 <section class="lancamentos">
-    <header class="page-header">
-        <div>
-            <h2>Lançamentos</h2>
-            <p>Controle suas receitas e despesas.</p>
-        </div>
-    </header>
+
+    <app-page-header
+        title="Lançamentos"
+        subtitle="Controle suas receitas e despesas."
+        primaryButtonText="+ Novo"
+        secondaryButtonText="+ Importar extrato">
+        (primaryAction)="irParaNovoLancamento()"
+    </app-page-header>
 
     <!-- PRIMEIRO CARD -->
     <section class="panel month-filter">
@@ -49,7 +51,7 @@
 
 
     <!-- PENULTIMA SEÇAO (LANÇAMENTO NOVO) ----------------------------------------------------------------------------------->
-    <section class="panel form-panel">
+    <section id="formulario-lancamento" class="panel form-panel">
         <h3>Novo lançamento</h3>
 
 
@@ -104,7 +106,6 @@
             <h3>Movimentações</h3>
             <span>{{ lancamentosFiltrados.length }} registros</span>
         </div>
-sinm
 
         @if (lancamentosFiltrados.length > 0) {
         <div class="table-wrapper">
@@ -142,7 +143,9 @@ sinm
             </table>
         </div>
         } @else {
-        <p>Nenhum lançamento cadastrado.</p>
+
+        <p>Nenhum lançamento encontrado neste mês.</p>
+
         }
 
 

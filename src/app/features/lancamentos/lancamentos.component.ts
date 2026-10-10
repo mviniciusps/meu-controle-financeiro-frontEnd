@@ -1,6 +1,7 @@
 import { CurrencyPipe, DatePipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { PageHeaderComponent } from '../../shared/components/page-header/page-header.component';
 
 interface Lancamento {
   id: number;
@@ -14,7 +15,7 @@ interface Lancamento {
 @Component({
   selector: 'app-lancamentos',
   standalone: true,
-  imports: [CurrencyPipe, DatePipe, FormsModule],
+  imports: [CurrencyPipe, DatePipe, FormsModule, PageHeaderComponent],
   templateUrl: './lancamentos.component.html',
   styleUrl: './lancamentos.component.scss'
 })
@@ -23,7 +24,7 @@ export class LancamentosComponent {
   valor: number | null = null;
   tipo: 'Receita' | 'Despesa' = 'Despesa';
   categoria = 'Alimentação';
-  data = new Date().toISOString().slice(0, 10);
+  data = this.obterDataAtual();
 
   categorias = [
     'Moradia',
@@ -123,7 +124,7 @@ export class LancamentosComponent {
     this.valor = null;
     this.tipo = 'Despesa';
     this.categoria = 'Alimentação';
-    this.data = new Date().toISOString().slice(0, 10);
+    this.data = this.obterDataAtual();
 
   }
 
@@ -159,6 +160,21 @@ export class LancamentosComponent {
     const mes = String(hoje.getMonth() + 1).padStart(2, '0');
 
     return `${ano}-${mes}`;
+  }
+
+  obterDataAtual(): string {
+    const hoje = new Date();
+    const ano = hoje.getFullYear();
+    const mes = String(hoje.getMonth() + 1).padStart(2, '0');
+    const dia = String(hoje.getDate()).padStart(2, '0');
+
+    return `${ano}-${mes}-${dia}`;
+  }
+
+  irParaNovoLancamento(): void {
+    document
+      .getElementById('formulario-lancamento')
+      ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
 }

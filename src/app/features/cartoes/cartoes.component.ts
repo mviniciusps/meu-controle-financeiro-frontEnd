@@ -1,6 +1,7 @@
 import { CurrencyPipe, DatePipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { PageHeaderComponent } from '../../shared/components/page-header/page-header.component';
 
 interface Cartao {
   id: number;
@@ -26,7 +27,7 @@ interface Compra {
 @Component({
   selector: 'app-cartoes',
   standalone: true,
-  imports: [CurrencyPipe, DatePipe, FormsModule],
+  imports: [CurrencyPipe, DatePipe, FormsModule, PageHeaderComponent],
   templateUrl: './cartoes.component.html',
   styleUrl: './cartoes.component.scss'
 })

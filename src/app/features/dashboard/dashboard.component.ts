@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { CurrencyPipe, DecimalPipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { PageHeaderComponent } from '../../shared/components/page-header/page-header.component';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [CurrencyPipe, DecimalPipe, RouterLink],
+  imports: [CurrencyPipe, DecimalPipe, RouterLink, PageHeaderComponent],
   // RouterLink pois é STANDALONE
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
